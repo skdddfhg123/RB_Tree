@@ -25,22 +25,22 @@ rbtree *new_rbtree(void) {
 static void	free_traversal(rbtree *t, node_t *root) {
 	if (root != t->nil) {
 		free_traversal(t, root->left);
-		free(root);
 		free_traversal(t, root->right);
-		root = NULL;
+		free(root);
 	}
+  // root = NULL;
 }
 
 void delete_rbtree(rbtree *t) {
 	// TODO: reclaim the tree nodes's memory
-  if (t->root != t->nil)
-	  free_traversal(t, t->root);
+  // if (t->root != t->nil)
+  free_traversal(t, t->root);
 	if (t->nil) {
 	  free(t->nil);
-	  t->nil = NULL;
+	  // t->nil = NULL;
 	}
 	free(t);
-	t = NULL;
+	// t = NULL;
 }
 
 node_t *rbtree_find(const rbtree *t, const key_t key) {

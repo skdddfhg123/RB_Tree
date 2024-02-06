@@ -4,20 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	  inorder_traversal(rbtree *t, node_t *root) {
-	if (root != t->nil) {
-		inorder_traversal(t, root->left);
-		printf("%d ", root->key);
-		inorder_traversal(t, root->right);
-	}
-}
-
-static void		print_tree_inorder(rbtree *t) {
-	printf("Inorder Traversal: ");
-	inorder_traversal(t, t->root);
-	printf("\n");
-}
-
 // new_rbtree should return rbtree struct with null root node
 void test_init(void) {
   rbtree *t = new_rbtree();
@@ -30,8 +16,6 @@ void test_init(void) {
 #endif
   delete_rbtree(t);
 }
-
-
 
 // root node should have proper values and pointers
 void test_insert_single(const key_t key) {
@@ -326,20 +310,10 @@ void test_to_array_suite() {
   delete_rbtree(t);
 }
 
-
 void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
-  // for (int i = 0; i < 15; i++)
-  //   rbtree_insert(t, i);
-  // inorder_traversal(t, t->root);
-  // printf("\n");
-  // visualize_tree(t, 4);
-  // delete_rbtree(t);
-  // rbtree *tt = new_rbtree();
-
   for (int i = 0; i < n; i++) {
     node_t *p = rbtree_insert(t, arr[i]);
     assert(p != NULL);
-    rbtree_find(t, i);
   }
 
   for (int i = 0; i < n; i++) {
@@ -348,7 +322,6 @@ void test_find_erase(rbtree *t, const key_t *arr, const size_t n) {
     assert(p != NULL);
     assert(p->key == arr[i]);
     rbtree_erase(t, p);
-    // print_tree_inorder(t);
   }
 
   for (int i = 0; i < n; i++) {
@@ -406,6 +379,5 @@ int main(void) {
   test_duplicate_values();
   test_multi_instance();
   test_find_erase_rand(10000, 17);
-  system("leaks test-rbtree");
   printf("Passed all tests!\n");
 }

@@ -64,6 +64,7 @@ void	rb_delete(rbtree *t, node_t *n) {
 	}
 	if (original_color == RBTREE_BLACK)
 		rb_delete_fixup(t, x);
+	free(n);
 }
 
 void rb_delete_fixup(rbtree *t, node_t *x) {
